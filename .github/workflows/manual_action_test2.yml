@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
         with:
@@ -16,10 +17,17 @@ jobs:
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
           insecure_skip_tls_verify: true
           namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
-      - name: Testing oc...
+
+      # Build the image
+      # Get its build ID
+      # Get the commit ID of that build
+      # Tag the new build with both the commit ID and "test"
+      # ----------------------------------------------------
+      - name: Build and tag the image
         run: |
           oc version
           oc start-build test10 --follow -n iankwatts-tools
           export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
           export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
           oc tag -n iankwatts-tools test10:latest test10:$COMMITID test10:test
+
