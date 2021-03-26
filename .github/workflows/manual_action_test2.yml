@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install oc
-        uses: redhat-actions/oc-installer@v1
-        with:
-          oc_version: '4.6'
+      #- name: Install oc
+      #  uses: redhat-actions/oc-installer@v1
+      #  with:
+      #    oc_version: '4.6'
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
         with:
@@ -19,4 +19,5 @@ jobs:
           namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
       - name: Testing oc...
         run: |
-          'oc get projects'
+          oc version
+          oc get projects
