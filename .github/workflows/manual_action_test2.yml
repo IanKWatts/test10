@@ -1,4 +1,4 @@
-name: Manual Action Test2
+name: Manual Action Test 2
 on:
   workflow_dispatch:
 
@@ -6,17 +6,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Checkout oc-installer action
-        uses: actions/checkout@v2
-
-      - name: Install oc
-        uses: redhat-actions/oc-installer@v1
+      - name: Log in to OpenShift
+        uses: redhat-actions/oc-login@v1
         with:
-          version: "latest"
-
-      - name: Start build
+          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          insecure_skip_tls_verify: true
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      - name: Testing oc...
         run: |
-          'oc version'
-          'oc start-build test10 --follow -n iankwatts-tools'
-          'oc tag -n iankwatts-tools test10:latest test10:$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)) test10:test'
+          'oc get projects'
