@@ -6,10 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      #- name: Install oc
-      #  uses: redhat-actions/oc-installer@v1
-      #  with:
-      #    oc_version: '4.6'
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
         with:
@@ -21,3 +17,5 @@ jobs:
         run: |
           oc version
           oc get projects
+          oc start-build test10 --follow -n iankwatts-tools
+          oc tag -n iankwatts-tools test10:latest test10:$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)) test10:test
