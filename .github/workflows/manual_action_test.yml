@@ -14,3 +14,4 @@ jobs:
           cmd: |
             'version'
             'start-build test10 --follow -n iankwatts-tools'
+            'tag -n iankwatts-tools test10:latest test10:$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)) test10:test'
