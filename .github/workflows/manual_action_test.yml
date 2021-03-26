@@ -12,5 +12,5 @@ jobs:
           openshift_server_url: ${{ secrets.OpenShiftServerURL }}
           parameters: '{ "apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true" }'
           cmd: |
-            'oc version'
-            'oc start-build test10 --follow -n iankwatts-tools'
+            'version'
+            'start-build test10 --follow -n iankwatts-tools'
