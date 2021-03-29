@@ -1,9 +1,6 @@
 name: Manual Action Test 2
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   build:
