@@ -4,7 +4,7 @@ on:
 
 jobs:
   build:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/action_if_branch'
     runs-on: ubuntu-latest
     steps:
 
