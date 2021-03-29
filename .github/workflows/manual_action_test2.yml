@@ -4,9 +4,11 @@ on:
 
 jobs:
   build:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/action_if_branch'
+    #if: github.event_name == 'push' && github.ref == 'refs/heads/feature/action_if_branch'
     runs-on: ubuntu-latest
     steps:
+
+      - run: echo ${{github.ref}}
 
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
