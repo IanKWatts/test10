@@ -1,0 +1,11 @@
+name: Action on pull request or PR update
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{github.ref}}
+      - run: echo ${{github.event.pull_request.head.ref}}
