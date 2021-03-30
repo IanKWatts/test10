@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-    types: [ closed ]
 
 jobs:
   build:
@@ -14,6 +13,7 @@ jobs:
     # Only migrate from Test to Prod if the push is from the staging branch
     # ---------------------------------------------------------------------
     #if: github.event.pull_request.head.ref == 'refs/heads/staging' && github.event.pull_request.merged == true
+    #if: github.ref == 'refs/heads/staging'
 
     runs-on: ubuntu-latest
     steps:
