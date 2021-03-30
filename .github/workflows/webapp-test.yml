@@ -1,0 +1,38 @@
+name: Web app to Test
+
+# Tag the dev image for test when a pull request is opened 
+# from staging --> master
+# --------------------------------------------------------
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tag:
+
+    # Only tag the image if the pull request is from staging to master, as 
+    # opposed to a PR from another branch to master.
+    # --------------------------------------------------------------------
+    #if: github.event.pull_request.head.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+
+      - run: echo ${{github.ref}}
+      - run: echo ${{github.event.pull_request.head.ref}}
+
+    #  - name: Log in to OpenShift
+    #    uses: redhat-actions/oc-login@v1
+    #    with:
+    #      openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+    #      openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+    #      insecure_skip_tls_verify: true
+    #      namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+
+      # Tag the 'dev' image with 'test'
+      # -------------------------------
+    #  - name: Tag image with 'test'
+    #    run: |
+    #      oc version
+    #      oc tag -n iankwatts-tools test10:dev test10:test
+
