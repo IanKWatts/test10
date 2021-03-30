@@ -6,19 +6,21 @@ on:
   push:
     branches:
       - main
+    types: [ closed ]
 
 jobs:
   build:
 
     # Only migrate from Test to Prod if the push is from the staging branch
     # ---------------------------------------------------------------------
-    #if: github.event.pull_request.head.ref == 'refs/heads/staging'
+    #if: github.event.pull_request.head.ref == 'refs/heads/staging' && github.event.pull_request.merged == true
 
     runs-on: ubuntu-latest
     steps:
 
       - run: echo ${{github.ref}}
       - run: echo ${{github.event.pull_request.head.ref}}
+      - run: echo ${{github.event.pull_request.merged}}
 
     #  - name: Log in to OpenShift
     #    uses: redhat-actions/oc-login@v1
