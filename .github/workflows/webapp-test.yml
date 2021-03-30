@@ -15,7 +15,7 @@ jobs:
     # Only tag the image if the pull request is from staging to master, as 
     # opposed to a PR from another branch to master.
     # --------------------------------------------------------------------
-    #if: github.event.pull_request.head.ref == 'refs/heads/staging'
+    #if: github.event.pull_request.head.ref == 'staging'
     runs-on: ubuntu-latest
     steps:
 
