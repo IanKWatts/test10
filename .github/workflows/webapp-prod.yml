@@ -1,5 +1,8 @@
 name: Web app to Prod
 
+env:
+  GITHUB_CONTEXT: ${{ toJson(github) }}
+
 # When a PR from staging to master is merged, tag the 'test' image for 'prod'.
 # ----------------------------------------------------------------------------
 on:
@@ -21,6 +24,7 @@ jobs:
       - run: echo ${{github.ref}}
       - run: echo ${{github.event.pull_request.head.ref}}
       - run: echo ${{github.event.pull_request.merged}}
+      - run: echo "$GITHUB_CONTEXT"
 
     #  - name: Log in to OpenShift
     #    uses: redhat-actions/oc-login@v1
