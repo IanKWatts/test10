@@ -1,0 +1,37 @@
+name: Web app to Prod
+
+# When a PR from staging to master is merged, tag the 'test' image for 'prod'.
+# ----------------------------------------------------------------------------
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    # Only migrate from Test to Prod if the push is from the staging branch
+    # ---------------------------------------------------------------------
+    #if: github.event.pull_request.head.ref == 'refs/heads/staging'
+
+    runs-on: ubuntu-latest
+    steps:
+
+      - run: echo ${{github.ref}}
+      - run: echo ${{github.event.pull_request.head.ref}}
+
+    #  - name: Log in to OpenShift
+    #    uses: redhat-actions/oc-login@v1
+    #    with:
+    #      openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+    #      openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+    #      insecure_skip_tls_verify: true
+    #      namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+
+      # Tag the 'test' image for 'prod'
+      # -------------------------------
+    #  - name: Tag image with 'prod'
+    #    run: |
+    #      oc version
+    #      oc tag -n iankwatts-tools test10:test test10:prod
+
