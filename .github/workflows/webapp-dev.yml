@@ -1,5 +1,8 @@
 name: Web app to Dev
 
+env:
+  GITHUB_CONTEXT: ${{ toJson(github) }}
+
 # Create a new build and tag it with 'dev' when the staging branch is updated,
 # whether by pull request merge or directly.  Should be done by pull request.
 # ----------------------------------------------------------------------------
@@ -15,6 +18,7 @@ jobs:
 
       - run: echo ${{github.ref}}
       - run: echo ${{github.event.pull_request.head.ref}}
+      - run: echo "$GITHUB_CONTEXT"
 
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
