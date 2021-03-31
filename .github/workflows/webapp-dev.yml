@@ -1,4 +1,4 @@
-name: Web app to Dev
+name: Web app to (1) Dev
 
 env:
   GITHUB_CONTEXT: ${{ toJson(github) }}
