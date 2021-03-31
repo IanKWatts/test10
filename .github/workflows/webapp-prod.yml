@@ -21,10 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - run: echo ${{github.ref}}
-      - run: echo ${{github.event.pull_request.head.ref}}
-      - run: echo ${{github.event.pull_request.merged}}
-      - run: echo "$GITHUB_CONTEXT"
+      - run: echo "github: $GITHUB_CONTEXT"
 
     #  - name: Log in to OpenShift
     #    uses: redhat-actions/oc-login@v1
