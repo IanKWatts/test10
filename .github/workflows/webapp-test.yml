@@ -22,18 +22,18 @@ jobs:
       - run: echo ${{github.ref}}
       - run: echo ${{github.event.pull_request.head.ref}}
 
-    #  - name: Log in to OpenShift
-    #    uses: redhat-actions/oc-login@v1
-    #    with:
-    #      openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
-    #      openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-    #      insecure_skip_tls_verify: true
-    #      namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      - name: Log in to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          insecure_skip_tls_verify: true
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       # Tag the 'dev' image with 'test'
       # -------------------------------
-    #  - name: Tag image with 'test'
-    #    run: |
-    #      oc version
-    #      oc tag -n iankwatts-tools test10:dev test10:test
+      - name: Tag image with 'test'
+        run: |
+          oc version
+          oc tag -n iankwatts-tools test10:dev test10:test
 
