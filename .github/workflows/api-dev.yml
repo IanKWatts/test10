@@ -18,7 +18,7 @@ jobs:
       - name: Repository dispatch test
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.repository_dispatch }}
+          token: ${{ secrets.REPOSITORY_DISPATCH }}
           repository: ${{ github.repository }}
           event-type: trigger-web-dev
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
