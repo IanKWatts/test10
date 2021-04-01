@@ -7,9 +7,11 @@ env:
 # whether by pull request merge or directly.  Should be done by pull request.
 # ----------------------------------------------------------------------------
 on:
-  push:
-    branches:
-      - staging
+#  push:
+#    branches:
+#      - staging
+  repository_dispatch:
+    types: [trigger-web-dev]
 
 jobs:
   build:
@@ -18,24 +20,24 @@ jobs:
 
       - run: echo "$GITHUB_CONTEXT"
 
-      - name: Log in to OpenShift
-        uses: redhat-actions/oc-login@v1
-        with:
-          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-          insecure_skip_tls_verify: true
-          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      #- name: Log in to OpenShift
+      #  uses: redhat-actions/oc-login@v1
+      #  with:
+      #    openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+      #    openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+      #    insecure_skip_tls_verify: true
+      #    namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       # Build the image
       # Get its build ID
       # Get the commit ID of that build
       # Tag the new build with both the commit ID and "dev"
       # ---------------------------------------------------
-      - name: Build and tag the image
-        run: |
-          oc version
-          oc start-build test10 --follow -n iankwatts-tools
-          export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
-          export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
-          oc tag -n iankwatts-tools test10:latest test10:$COMMITID test10:dev
+      #- name: Build and tag the image
+      #  run: |
+      #    oc version
+      #    oc start-build test10 --follow -n iankwatts-tools
+      #    export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
+      #    export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
+      #    oc tag -n iankwatts-tools test10:latest test10:$COMMITID test10:dev
 
