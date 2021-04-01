@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Repository dispatch test
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.REPOSITORY_DISPATCH }}
-          event-type: trigger-web-dev
-          #client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+      - run: echo testing
+
+      #- name: Repository dispatch test
+      #  uses: peter-evans/repository-dispatch@v1
+      #  with:
+      #    token: ${{ secrets.REPOSITORY_DISPATCH }}
+      #    event-type: trigger-web-dev
+      #    #client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
