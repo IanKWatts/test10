@@ -1,9 +1,7 @@
 name: API to (1) Dev
 
-env:
-  GITHUB_CONTEXT: ${{ toJson(github) }}
-
 on:
+  workflow_dispatch:
   push:
     branches:
       - staging
@@ -13,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - run: echo "$GITHUB_CONTEXT"
+      - run: echo testing
 
       - name: Repository dispatch test
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPOSITORY_DISPATCH }}
-          repository: ${{ github.repository }}
           event-type: trigger-web-dev
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
