@@ -7,9 +7,9 @@ env:
 # whether by pull request merge or directly.  Should be done by pull request.
 # ----------------------------------------------------------------------------
 on:
-#  push:
-#    branches:
-#      - staging
+  push:
+    branches:
+      - staging
   repository_dispatch:
     types: [trigger-web-dev]
 
