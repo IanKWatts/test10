@@ -15,9 +15,10 @@ on:
   #  types: [trigger-web-dev]
   workflow_dispatch:
     inputs:
-      sourceBranch:
-        description: 'Branch to build from'
+      buildConfig:
+        description: 'Build Config to Use'
         required: true
+        default: platsrv-registry-web-dev-build
 
 jobs:
   build:
@@ -43,7 +44,7 @@ jobs:
       - name: Build and tag the image
         run: |
           oc version
-          echo "BRANCH: ${{ github.event.inputs.sourceBranch }}"
+          echo "Build Config: ${{ github.event.inputs.buildConfig }}"
       #    oc start-build test10 --follow -n iankwatts-tools
       #    export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
       #    export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
