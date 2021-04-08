@@ -48,5 +48,6 @@ jobs:
           oc start-build ${{ github.event.inputs.buildConfig }} --follow -n iankwatts-tools
           export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig ${{ github.event.inputs.buildConfig }})"
           export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build ${{ github.event.inputs.buildConfig }}-$BUILDID | cut -c1-7)"
-          oc tag -n iankwatts-tools ${{ github.event.inputs.buildConfig }}:latest ${{ github.event.inputs.buildConfig }}:$COMMITID ${{ github.event.inputs.buildConfig }}:dev
+          export IMAGESHA="$(oc get -o=jsonpath="{.status.output.to.imageDigest}" build ${{ github.event.inputs.buildConfig }}-$BUILDID)"
+          oc tag -n iankwatts-tools ${{ github.event.inputs.buildConfig }}@$IMAGESHA ${{ github.event.inputs.buildConfig }}:$COMMITID ${{ github.event.inputs.buildConfig }}:dev
 
