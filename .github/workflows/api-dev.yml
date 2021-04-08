@@ -1,7 +1,7 @@
 name: API to (1) Dev
 
 on:
-  workflow_dispatch:
+  #workflow_dispatch:
   #push:
   #  branches:
   #    - staging
