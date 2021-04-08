@@ -10,6 +10,7 @@ on:
   push:
     branches:
       - staging
+      - 'release/*'
   repository_dispatch:
     types: [trigger-web-dev]
 
@@ -19,23 +20,26 @@ jobs:
     steps:
 
       - run: echo "$GITHUB_CONTEXT"
+      - run: echo "${{ github.ref }}"
 
-      #- name: Log in to OpenShift
-      #  uses: redhat-actions/oc-login@v1
-      #  with:
-      #    openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
-      #    openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-      #    insecure_skip_tls_verify: true
-      #    namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      - name: Log in to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          insecure_skip_tls_verify: true
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       # Build the image
       # Get its build ID
       # Get the commit ID of that build
       # Tag the new build with both the commit ID and "dev"
       # ---------------------------------------------------
-      #- name: Build and tag the image
-      #  run: |
-      #    oc version
+      - name: Build and tag the image
+        run: |
+          oc version
+          export BRANCH="$(echo ${{ github.ref }} | rev | cut -d "/" -f 1 | rev)"
+          echo "BRANCH: $BRANCH"
       #    oc start-build test10 --follow -n iankwatts-tools
       #    export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
       #    export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
