@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       buildConfig:
-        description: 'Build Config to Use'
+        description: 'Enter Build Config'
         required: true
         default: platsrv-registry-web-dev-build
 
