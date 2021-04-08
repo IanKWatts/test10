@@ -7,20 +7,25 @@ env:
 # whether by pull request merge or directly.  Should be done by pull request.
 # ----------------------------------------------------------------------------
 on:
-  push:
-    branches:
-      - staging
-      - 'release/*'
-  repository_dispatch:
-    types: [trigger-web-dev]
+  #push:
+  #  branches:
+  #    - staging
+  #    - 'release/*'
+  #repository_dispatch:
+  #  types: [trigger-web-dev]
+  workflow_dispatch:
+    inputs:
+      sourceBranch:
+        description: 'Branch to build from'
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
 
-      - run: echo "$GITHUB_CONTEXT"
-      - run: echo "${{ github.ref }}"
+      #- run: echo "$GITHUB_CONTEXT"
+      #- run: echo "${{ github.ref }}"
 
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
@@ -38,9 +43,8 @@ jobs:
       - name: Build and tag the image
         run: |
           oc version
-          #export BRANCH="$(echo ${{ github.ref }} | rev | cut -d "/" -f 1 | rev)"
-          export BRANCH="$(echo ${{ github.ref }} | sed 's/refs\/heads\///')"
-          echo "BRANCH: $BRANCH"
+      #    export BRANCH="$(echo ${{ github.ref }} | sed 's/refs\/heads\///')"
+          echo "BRANCH: ${{ github.event.inputs.sourceBranch }}"
       #    oc start-build test10 --follow -n iankwatts-tools
       #    export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig test10)"
       #    export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build test10-$BUILDID | cut -c1-7)"
