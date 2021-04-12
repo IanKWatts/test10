@@ -8,7 +8,7 @@ env:
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -21,18 +21,18 @@ jobs:
 
       - run: echo "$GITHUB_CONTEXT"
 
-      - name: Log in to OpenShift
-        uses: redhat-actions/oc-login@v1
-        with:
-          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-          insecure_skip_tls_verify: true
-          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      #- name: Log in to OpenShift
+      #  uses: redhat-actions/oc-login@v1
+      #  with:
+      #    openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
+      #    openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+      #    insecure_skip_tls_verify: true
+      #    namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       # Tag the 'test' image for 'prod'
       # -------------------------------
-      - name: Tag image with 'prod'
-        run: |
-          oc version
-          oc tag -n iankwatts-tools test10:test test10:prod
+      #- name: Tag image with 'prod'
+      #  run: |
+      #    oc version
+      #    oc tag -n iankwatts-tools test10:test test10:prod
 
