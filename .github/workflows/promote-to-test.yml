@@ -1,0 +1,32 @@
+name: Promote to Test
+
+# Promote to Test:
+#	1) manually, or
+# 	2) when a pull request is opened to main
+# ----------------------------------------------
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Tag DB image for Test
+        run: echo "Tagging DB for Test"
+
+      - run: sleep 3
+
+      - name: Tag API image for Test
+        if: ${{ success() }}
+        run: echo "Tagging DB for Test"
+
+      - run: sleep 3
+
+      - name: Tag Web image for Test
+        if: ${{ success() }}
+        run: echo "Tagging Web for Test"
+
