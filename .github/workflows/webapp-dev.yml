@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      #- run: echo "$GITHUB_CONTEXT"
+      #- run: echo "<build and tag for dev>"
       #- run: echo "${{ github.ref }}"
       #- name: Get date
       #  id: get_date
@@ -35,14 +35,6 @@ jobs:
       #  env:
       #    RELEASE_NAME: release/${{ steps.get_date.outputs.date }}
 
-      - name: Log in to OpenShift
-        uses: redhat-actions/oc-login@v1
-        with:
-          openshift_server_url: ${{ secrets.OPENSHIFT_URL }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-          insecure_skip_tls_verify: true
-          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
-
       # Build the image
       # Get its build ID
       # Get the commit ID of that build
@@ -51,10 +43,11 @@ jobs:
       - name: Build and tag the image
         run: |
           oc version
+          oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
           echo "Build Config: ${{ github.event.inputs.buildConfig }}"
           oc start-build ${{ github.event.inputs.buildConfig }} --follow -n iankwatts-tools
-          export BUILDID="$(oc get -o=jsonpath="{.status.lastVersion}" buildconfig ${{ github.event.inputs.buildConfig }})"
-          export COMMITID="$(oc get -o=jsonpath="{.spec.revision.git.commit}" build ${{ github.event.inputs.buildConfig }}-$BUILDID | cut -c1-7)"
-          export IMAGESHA="$(oc get -o=jsonpath="{.status.output.to.imageDigest}" build ${{ github.event.inputs.buildConfig }}-$BUILDID)"
-          oc tag -n iankwatts-tools ${{ github.event.inputs.buildConfig }}@$IMAGESHA test10:$COMMITID test10:dev
+          export BUILDID="$(oc -n iankwatts-tools get -o=jsonpath="{.status.lastVersion}" buildconfig ${{ github.event.inputs.buildConfig }})"
+          export COMMITID="$(oc -n iankwatts-tools get -o=jsonpath="{.spec.revision.git.commit}" build ${{ github.event.inputs.buildConfig }}-$BUILDID | cut -c1-7)"
+          export IMAGESHA="$(oc -n iankwatts-tools get -o=jsonpath="{.status.output.to.imageDigest}" build ${{ github.event.inputs.buildConfig }}-$BUILDID)"
+          oc -n iankwatts-tools tag ${{ github.event.inputs.buildConfig }}@$IMAGESHA test10:$COMMITID test10:dev
 
