@@ -22,7 +22,7 @@ jobs:
 
       - name: Tag API image for Test
         if: ${{ success() }}
-        run: echo "Tagging DB for Test"
+        run: asdfasdfadfasdf
 
       - run: sleep 3
 
