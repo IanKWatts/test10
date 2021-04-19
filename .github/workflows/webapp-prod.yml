@@ -40,7 +40,7 @@ jobs:
 
       - run: export DATE=$(date +%Y-%m-%d)
       - run: export RELEASE_LABEL="release-$DATE"
-      - run: echo "$RELEASE_LABEL"
+      - run: echo $RELEASE_LABEL
 
       #- name: Tag the commit
       #  uses: actions/github-script@v3
