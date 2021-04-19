@@ -12,6 +12,9 @@ on:
         description: 'Enter a brief description of this release'
         required: true
 
+  release:
+    types: [ published ]
+
 jobs:
   promote:
 
