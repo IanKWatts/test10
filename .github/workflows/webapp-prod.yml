@@ -15,6 +15,11 @@ on:
   release:
     types: [ published ]
 
+  push:
+    branches:
+      - main
+    types: [ opened, synchrize, reopened ]
+
 jobs:
   promote:
 
@@ -24,19 +29,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Log in to OpenShift
-        run: |
-          oc version
-          oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
-          oc get pod test10-1-5bpbp
+      - run: echo "$GITHUB_CONTEXT"
 
-      - name: Run if first step was successful
-        if: ${{ success() }}
-        run: echo SUCCESS
+      #- name: Log in to OpenShift
+      #  run: |
+      #    oc version
+      #    oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
+      #    oc get pod test10-1-5bpbp
 
-      - name: Run if first step was not successful
-        if: ${{ failure() }}
-        run: echo FAILURE
+      #- name: Run if first step was successful
+      #  if: ${{ success() }}
+      #  run: echo SUCCESS
+
+      #- name: Run if first step was not successful
+      #  if: ${{ failure() }}
+      #  run: echo FAILURE
 
 
       # Tag the 'test' image for 'prod'
