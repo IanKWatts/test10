@@ -6,9 +6,9 @@ name: Promote to Test
 # ----------------------------------------------
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
+  #pull_request:
+  #  branches:
+  #    - main
 
 jobs:
   promote:
@@ -20,13 +20,13 @@ jobs:
 
       - run: sleep 3
 
-      - name: Tag API image for Test
-        if: ${{ success() }}
-        run: asdfasdfadfasdf
+      #- name: Tag API image for Test
+      #  if: ${{ success() }}
+      #  run: asdfasdfadfasdf
 
-      - run: sleep 3
+      #- run: sleep 3
 
-      - name: Tag Web image for Test
-        if: ${{ success() }}
-        run: echo "Tagging Web for Test"
+      #- name: Tag Web image for Test
+      #  if: ${{ success() }}
+      #  run: echo "Tagging Web for Test"
 
