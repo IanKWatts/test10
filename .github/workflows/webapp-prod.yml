@@ -38,7 +38,10 @@ jobs:
 
       - name: Run if first step was successful
         if: ${{ success() }}
-        run: echo SUCCESS
+        run: |
+          echo "SUCCESS"
+          echo "sleeping..."
+          sleep 10
 
       - name: Run if first step was not successful
         if: ${{ failure() }}
