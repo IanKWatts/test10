@@ -1,0 +1,55 @@
+name: Testing paths-filter
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "api/**"
+      - "db/**"
+      - "web/**"
+
+jobs:
+  check_for_component_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      db: ${{ steps.filter.outputs.db }}
+      api: ${{ steps.filter.outputs.api }}
+      web: ${{ steps.filter.outputs.web }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          db:
+            - 'db/**'
+          api:
+            - 'api/**'
+          web:
+            - 'web/**'
+
+  db_test:
+    needs: check_for_component_changes
+    if: ${{ needs.check_for_component_changes.outputs.db == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo db_test
+
+  api_test:
+    needs: check_for_component_changes
+    if: ${{ needs.check_for_component_changes.outputs.api == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo api_test
+
+  web_test:
+    needs: check_for_component_changes
+    if: ${{ needs.check_for_component_changes.outputs.web == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo web_test
+
