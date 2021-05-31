@@ -31,14 +31,22 @@ jobs:
 
   db_test:
     needs: check_for_component_changes
-    if: ${{ needs.check_for_component_changes.outputs.db == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: debug
+        if: ${{ needs.check_for_component_changes.outputs.db == 'true' }}
         run: echo db_test
 
   api_test:
-    needs: [check_for_component_changes, db_test]
+    needs: [db_test]
+    if: ${{ needs.check_for_component_changes.outputs.api == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo api_test
+
+  api_build:
+    needs: [api_test]
     if: ${{ needs.check_for_component_changes.outputs.api == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +54,15 @@ jobs:
         run: echo api_test
 
   web_test:
-    needs: [check_for_component_changes, api_test]
+    needs: [db_test]
+    if: ${{ needs.check_for_component_changes.outputs.web == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: echo web_test
+
+  web_build:
+    needs: [web_test]
     if: ${{ needs.check_for_component_changes.outputs.web == 'true' }}
     runs-on: ubuntu-latest
     steps:
