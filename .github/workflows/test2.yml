@@ -13,7 +13,7 @@ jobs:
         run: |
           oc version
           oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
-          oc project {{ env.OCP_PROJECT_NAME }}
+          oc project ${{ env.OCP_PROJECT_NAME }}
 
       - name: Debug
         if: ${{ failure() }}
