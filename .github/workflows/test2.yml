@@ -7,7 +7,7 @@ jobs:
   do_ocp:
     runs-on: ubuntu-latest
     env:
-      OCP_PROJECT_NAME: iankwatts-tools
+      OCP_PROJECT_NAME: iankwatts-toolsX
     steps:
       - name: OCP login
         run: |
