@@ -7,7 +7,7 @@ jobs:
   do_ocp:
     runs-on: ubuntu-latest
     env:
-      env.OCP_PROJECT_NAME: iankwatts-tools
+      OCP_PROJECT_NAME: iankwatts-tools
     steps:
       - name: OCP login
         run: |
@@ -21,3 +21,4 @@ jobs:
         
       - name: Okay
         run: echo "Okay"
+
