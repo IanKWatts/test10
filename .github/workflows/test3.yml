@@ -1,4 +1,4 @@
-name: Test action failure
+name: Test inputs
 
 on:
   workflow_dispatch:
