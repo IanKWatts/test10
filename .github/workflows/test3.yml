@@ -1,0 +1,22 @@
+name: Test action failure
+
+on:
+  workflow_dispatch:
+    inputs:
+      cluster:
+        description: "Enter cluster to install Artifactory to [ klab, clab, silver, gold ]: "
+        required: true
+        default: KLAB
+
+jobs:
+  use_input:
+    runs-on: ubuntu-latest
+    env:
+      KLAB_TT: "This is KLAB"
+      CLAB_TT: "This is CLAB"
+      SILVER_TT: "This is SILVER"
+      GOLD_TT: "This is GOLD"
+    steps:
+      - name: Var test
+        run: echo "--> ${{ env.${{ github.event.inputs.cluster }}_TT }}"
+
