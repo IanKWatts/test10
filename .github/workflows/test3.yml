@@ -1,22 +1,51 @@
-name: Test inputs
+name: Test paths for clusters
 
 on:
-  workflow_dispatch:
-    inputs:
-      cluster:
-        description: "Enter cluster to install Artifactory to [ klab, clab, silver, gold ]: "
-        required: true
-        default: KLAB
+  #workflow_dispatch:
+  #  inputs:
+  #    cluster:
+  #      description: "Enter cluster to install Artifactory to [ klab, clab, silver, gold ]: "
+  #      required: true
+  #      default: KLAB
+  push:
+    branches:
+      - main
+    paths:
+      - "paths/test_*"
 
 jobs:
-  use_input:
+  check_paths:
     runs-on: ubuntu-latest
-    env:
-      KLAB_TT: "This is KLAB"
-      CLAB_TT: "This is CLAB"
-      SILVER_TT: "This is SILVER"
-      GOLD_TT: "This is GOLD"
+    outputs:
+      klab: ${{ steps.filter.outputs.klab }}
+      clab: ${{ steps.filter.outputs.clab }}
+      silver: ${{ steps.filter.outputs.silver }}
+      gold: ${{ steps.filter.outputs.gold }}
     steps:
-      - name: Var test
-        run: echo "--> ${{ env.format('{0}_TT', github.event.inputs.cluster) }}"
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          klab: "paths/test_klab"
+          clab: "paths/test_clab"
+          silver: "paths/test_silver"
+          gold: "paths/test_gold"
+
+  test1:
+    needs: check_paths
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do KLAB
+        if: ${{ needs.check_paths.outputs.klab == 'true' }}
+        run: echo "--> KLAB"
+      - name: Do CLAB
+        if: ${{ needs.check_paths.outputs.clab == 'true' }}
+        run: echo "--> CLAB"
+      - name: Do SILVER
+        if: ${{ needs.check_paths.outputs.silver == 'true' }}
+        run: echo "--> SILVER"
+      - name: Do GOLD
+        if: ${{ needs.check_paths.outputs.gold == 'true' }}
+        run: echo "--> GOLD"
 
