@@ -25,7 +25,7 @@ jobs:
         id: oc-project
         
       - name: Debug
-        run: echo "--> ${{ env.oc-project }}"
+        run: echo "--> ${{ steps.oc-project.outputs.oc-project }}"
 
       - name: Okay
         run: echo "Okay"
