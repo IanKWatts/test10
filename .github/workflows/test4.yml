@@ -1,0 +1,15 @@
+name: Action on release publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  do_on_publish:
+    runs-on: ubuntu-latest
+      ARTIFACTORY_VERSION: 7.1.3
+    steps:
+
+      - name: Install to Prod
+        run: echo "Installing Artifactory version ${{ env.ARTIFACTORY_VERSION }} to Prod..."
+
