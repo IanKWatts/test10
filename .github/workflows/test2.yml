@@ -8,25 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OCP_PROJECT_NAME: iankwatts-tools
+      ARTIFACTORY_VERSION: 7.1.3
     steps:
-      - name: OCP login
-        run: |
-          oc version
-          oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
-          oc project ${{ env.OCP_PROJECT_NAME }}
+      #- name: OCP login
+      #  run: |
+      #    oc version
+      #    oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
+      #    oc project ${{ env.OCP_PROJECT_NAME }}
 
       #- name: Debug
       #  if: ${{ failure() }}
       #  run: echo "Error - exiting" && exit 1
 
-      - name: Project check
-        run: |
-          echo "::set-output name=oc-project::$(oc project)"
-        id: oc-project
-        
-      - name: Debug
-        run: echo "--> ${{ steps.oc-project.outputs.oc-project }}"
-
-      - name: Okay
-        run: echo "Okay"
+      - name: Create release draft
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
+          name: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
+          allowUpdates: true
+          omitBody: true
 
