@@ -28,4 +28,5 @@ jobs:
           name: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
           allowUpdates: true
           omitBody: true
+          tag: artifactory
 
