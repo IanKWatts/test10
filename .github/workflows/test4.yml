@@ -7,7 +7,7 @@ jobs:
   do_on_publish:
     runs-on: ubuntu-latest
     env:
-      ARTIFACTORY_VERSION: 7.1.7
+      ARTIFACTORY_VERSION: 7.1.8
     steps:
       - name: Install to Prod
         run: echo "Installing Artifactory version ${{ env.ARTIFACTORY_VERSION }} to Prod..."

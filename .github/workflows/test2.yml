@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OCP_PROJECT_NAME: iankwatts-tools
-      ARTIFACTORY_VERSION: 7.1.7
+      ARTIFACTORY_VERSION: 7.1.8
     steps:
       #- name: OCP login
       #  run: |
@@ -24,7 +24,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.PAT }}
-          draft: true
+          draft: false
           name: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
           allowUpdates: true
           omitBody: true
