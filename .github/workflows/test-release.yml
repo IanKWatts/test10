@@ -1,10 +1,10 @@
-name: Action on release 
+name: Run when release
 
 on:
   release:
 
 jobs:
-  do_on_publish:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Install to Prod
