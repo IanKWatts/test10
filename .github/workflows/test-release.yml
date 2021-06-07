@@ -3,7 +3,7 @@ name: Run when release
 on:
   workflow_dispatch:
   release:
-    types: [published, created, released]
+    types: [published]
 
 jobs:
   publish:

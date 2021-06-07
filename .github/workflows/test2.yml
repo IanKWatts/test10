@@ -24,10 +24,10 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.PAT }}
-          draft: false
+          draft: true
           name: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
           allowUpdates: true
           omitBody: true
-          tag: artifactory
+          tag: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
           commit: main
 
