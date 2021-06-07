@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OCP_PROJECT_NAME: iankwatts-tools
-      ARTIFACTORY_VERSION: 7.1.13
+      ARTIFACTORY_VERSION: 7.1.14
     steps:
       #- name: OCP login
       #  run: |
