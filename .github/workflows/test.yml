@@ -1,5 +1,8 @@
 name: Testing paths-filter
 
+env:
+  GITHUB_CONTEXT: ${{ toJson(github) }}
+
 on:
   push:
     branches:
@@ -29,7 +32,7 @@ jobs:
             - 'api/**'
           web:
             - 'web/**'
-    - run: echo "$GITHUB_CONTEXT"
+    - run: echo "env.GITHUB_CONTEXT: ${{ env.GITHUB_CONTEXT }}"
 
   db_test:
     needs: check_for_component_changes
