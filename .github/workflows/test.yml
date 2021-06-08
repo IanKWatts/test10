@@ -36,6 +36,8 @@ jobs:
       run: |
         echo "env.GITHUB_CONTEXT:"
         echo $GITHUB_CONTEXT
+        echo ""
+        echo "event: $GITHUB_CONTEXT.event_name"
 
   db_test:
     needs: check_for_component_changes
