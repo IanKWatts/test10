@@ -29,8 +29,7 @@ jobs:
             - 'api/**'
           web:
             - 'web/**'
-    - name: trigger info
-      run: echo "github.event.action --> ${{ github.event.action }}"
+    - run: echo "$GITHUB_CONTEXT"
 
   db_test:
     needs: check_for_component_changes
