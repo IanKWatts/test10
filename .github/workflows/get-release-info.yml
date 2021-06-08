@@ -6,13 +6,16 @@ on:
 jobs:
   get_release_info:
     runs-on: ubuntu-latest
+    env:
+      GET_RELEASE_INFO: "curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url'"
     steps:
+      - name: Show command
+        run: echo "--> ${{ env.GET_RELEASE_INFO }}"
+
       - name: Fetch release URL
         id: release_url
         #run: echo "::set-output name=release_edit_url::$(curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url' | sed 's/releases\/tag/releases\/edit/' | sed 's/"//g')"
 
-        env:
-          GET_RELEASE_INFO: "curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url'"
         run: echo "::set-output name=release_edit_url::$($GET_RELEASE_INFO)\n"
 
       - name: Show URL

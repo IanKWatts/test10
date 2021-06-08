@@ -8,6 +8,7 @@ on:
       - "api/**"
       - "db/**"
       - "web/**"
+  workflow_dispatch:
 
 jobs:
   check_for_component_changes:
@@ -28,6 +29,8 @@ jobs:
             - 'api/**'
           web:
             - 'web/**'
+    - name: trigger info
+      run: echo "github.event.action --> ${{ github.event.action }}"
 
   db_test:
     needs: check_for_component_changes
