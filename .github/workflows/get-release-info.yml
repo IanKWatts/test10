@@ -7,18 +7,11 @@ jobs:
   get_release_info:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch release info
-        uses: abatilo/release-info-action@v1.3.0
-        id: release_info
-        with:
-          owner: IanKWatts
-          repo: test10
+      - name: Fetch release URL
+        id: release_url
+        run: echo "::set-output name=release_edit_url::$(curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url' | sed 's/releases\/tag/releases\/edit/' | sed 's/"//g')"
 
-      - name: Use release info
-        run: |
-          echo "--> ${{ steps.release_info.outputs.tag_name }}"
-          echo "--> ${{ steps.release_info.outputs.draft }}"
-          echo "--> ${{ steps.release_info.outputs.html_url }}"
-          echo "--> ${{ steps.release_info.outputs.author.login }}"
+      - name: Show URL
+        run: echo "--> ${{ steps.release_url.outputs.release_edit_url }}"
 
 
