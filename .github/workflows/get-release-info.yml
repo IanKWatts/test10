@@ -9,7 +9,8 @@ jobs:
     steps:
       - name: Fetch release URL
         id: release_url
-        run: echo "::set-output name=release_edit_url::$(curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url' | sed 's/releases\/tag/releases\/edit/' | sed 's/"//g')"
+        #run: echo "::set-output name=release_edit_url::$(curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url' | sed 's/releases\/tag/releases\/edit/' | sed 's/"//g')"
+        run: echo "::set-output name=release_edit_url::$(curl -H 'Authorization: token ${{ env.GITHUB_TOKEN }}' 'https://api.github.com/repos/IanKWatts/test10/releases' | jq '.[0].html_url')"
 
       - name: Show URL
         run: echo "--> ${{ steps.release_url.outputs.release_edit_url }}"
