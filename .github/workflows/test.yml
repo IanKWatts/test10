@@ -32,7 +32,10 @@ jobs:
             - 'api/**'
           web:
             - 'web/**'
-    - run: echo "env.GITHUB_CONTEXT: $GITHUB_CONTEXT"
+    - name: debug env
+      run: |
+        echo "env.GITHUB_CONTEXT:"
+        echo $GITHUB_CONTEXT
 
   db_test:
     needs: check_for_component_changes
