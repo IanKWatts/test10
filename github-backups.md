@@ -86,7 +86,7 @@ To restore a repository's files (just the Git files, not other resources like is
 - Change to the local copy of the repository, e.g.,
   - `cd /tmp/repositories/platform-services/repository`
 - Do a checkout for each branch, otherwise they won't all get created in the new empty repository.
-  - `for b in \`git branch -r | grep -v " -> " | sed 's/^.*origin\///'\`; do git checkout $b; done`
+  - ``for b in `git branch -r | grep -v " -> " | sed 's/^.*origin\///'`; do git checkout $b; done``
 - Set the remote URL to the new repo
   - `git remote set-url origin https://github.com/BCDevOps/platform-services.git`
 - Push to the newly created repository
