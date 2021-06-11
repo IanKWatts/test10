@@ -20,21 +20,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Prepare KLAB params
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-        run: |
-          echo ARTIFACTORY_LICENSE=\"${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
+      - name: Show ENV
+        run: echo "${{ github }}"
 
-      - name: Prepare PROD params
-        if: ${{ github.event_name == 'release' }}
-        run: |
-          echo ARTIFACTORY_LICENSE=\"${{ secrets.SILVER_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
+      #- name: Prepare KLAB params
+      #  if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+      #  run: |
+      #    echo ARTIFACTORY_LICENSE=\"${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
 
-      - name: Generate master_key
-        run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
+      #- name: Prepare PROD params
+      #  if: ${{ github.event_name == 'release' }}
+      #  run: |
+      #    echo ARTIFACTORY_LICENSE=\"${{ secrets.SILVER_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
 
-      - name: Review
-        run: |
-          echo "ARTIFACTORY_LICENSE: ${{ env.ARTIFACTORY_LICENSE }}"
-          echo "MASTER_KEY: ${{ env.MASTER_KEY }}"
+      #- name: Generate master_key
+      #  run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
+
+      #- name: Review
+      #  run: |
+      #    echo "ARTIFACTORY_LICENSE: ${{ env.ARTIFACTORY_LICENSE }}"
+      #    echo "MASTER_KEY: ${{ env.MASTER_KEY }}"
 
