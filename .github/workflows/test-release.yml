@@ -30,10 +30,6 @@ jobs:
         if: contains(github.event.release.name, 'artifactory-ha')
         run: echo "This is an Artifactory release"
 
-      - name: If not artifactory
-        if: !contains(github.event.release.name, 'artifactory-ha')
-        run: echo "This is not an Artifactory release"
-
       #- name: Prepare KLAB params
       #  if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
       #  run: |
