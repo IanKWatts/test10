@@ -24,11 +24,15 @@ jobs:
       #  run: echo "Not an artifactory release, exiting"; exit 0
 
       - name: Show ENV
-        run: echo "${{ env.GITHUB_CONTEXT }}"
+        run: |
+          echo "${{ env.GITHUB_CONTEXT }}"
+          echo ""
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event.release.name: ${{ github.event.release.name }}"
 
       - name: If it's an artifactory release
         if: |
-          (github.event_name == 'release' && contains(github.event.name, 'artifactory-ha')) ||
+          (github.event_name == 'release' && contains(github.event.release.name, 'artifactory-ha')) ||
           github.event_name != 'release'
         run: echo "It's an artifactory release"
 
