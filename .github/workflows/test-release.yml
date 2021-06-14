@@ -27,11 +27,11 @@ jobs:
         run: echo "${{ env.GITHUB_CONTEXT }}"
 
       - name: If artifactory
-        if: ${{ contains(github.event.release.name, "artifactory-") }}
+        if: contains(github.event.release.name, 'artifactory-ha')
         run: echo "This is an Artifactory release"
 
       - name: If not artifactory
-        if: ${{ !contains(github.event.release.name, "artifactory-") }}
+        if: !contains(github.event.release.name, 'artifactory-ha')
         run: echo "This is not an Artifactory release"
 
       #- name: Prepare KLAB params
