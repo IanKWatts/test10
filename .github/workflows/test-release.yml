@@ -26,6 +26,14 @@ jobs:
       - name: Show ENV
         run: echo "${{ env.GITHUB_CONTEXT }}"
 
+      - name: If artifactory
+        if: ${{ github.event.release.name == "artifactory-*" }}
+        run: echo "This is an Artifactory release"
+
+      - name: If not artifactory
+        if: ${{ github.event.release.name != "artifactory-*" }}
+        run: echo "This is not an Artifactory release"
+
       #- name: Prepare KLAB params
       #  if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
       #  run: |
