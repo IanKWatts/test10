@@ -25,7 +25,7 @@ jobs:
 
       - name: If artifactory release
         if: "!contains(github.event.release.name, 'artifactory-ha')"
-        run: echo "Not an artifactory release, exiting"; exit 1
+        run: echo "Not an artifactory release, exiting"; exit 0
 
       - name: Show ENV
         run: echo "${{ env.GITHUB_CONTEXT }}"
