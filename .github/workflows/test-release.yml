@@ -23,12 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: If artifactory release
+        if: ! contains(github.event.release.name, 'artifactory-ha')
+        run: echo "Not an artifactory release, exiting"; exit 1
+
       - name: Show ENV
         run: echo "${{ env.GITHUB_CONTEXT }}"
-
-      - name: If artifactory
-        if: contains(github.event.release.name, 'artifactory-ha')
-        run: echo "This is an Artifactory release"
 
       #- name: Prepare KLAB params
       #  if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
