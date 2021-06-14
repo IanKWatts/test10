@@ -15,36 +15,17 @@ on:
 
 jobs:
   artifactory-tesitng:
+    if: |
+      (github.event_name == 'release' && contains(github.event.release_name, 'artifactory-ha')) ||
+      github.event_name != 'release'
     runs-on: ubuntu-latest
-    env:
-      FILE_STAGING_DIR: /tmp
-      ARTIFACTORY_LICENSE_FILE: artifactory_license.txt
-      OCP_PROJECT_NAME: devops-artifactory
     steps:
       - uses: actions/checkout@v2
 
-      - name: If artifactory release
-        if: "!contains(github.event.release.name, 'artifactory-ha')"
-        run: echo "Not an artifactory release, exiting"; exit 0
+      #- name: If artifactory release
+      #  if: "!contains(github.event.release.name, 'artifactory-ha')"
+      #  run: echo "Not an artifactory release, exiting"; exit 0
 
       - name: Show ENV
         run: echo "${{ env.GITHUB_CONTEXT }}"
-
-      #- name: Prepare KLAB params
-      #  if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-      #  run: |
-      #    echo ARTIFACTORY_LICENSE=\"${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
-
-      #- name: Prepare PROD params
-      #  if: ${{ github.event_name == 'release' }}
-      #  run: |
-      #    echo ARTIFACTORY_LICENSE=\"${{ secrets.SILVER_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
-
-      #- name: Generate master_key
-      #  run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
-
-      #- name: Review
-      #  run: |
-      #    echo "ARTIFACTORY_LICENSE: ${{ env.ARTIFACTORY_LICENSE }}"
-      #    echo "MASTER_KEY: ${{ env.MASTER_KEY }}"
 
