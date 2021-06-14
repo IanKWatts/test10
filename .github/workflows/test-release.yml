@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: If artifactory release
-        if: !contains(github.event.release.name, 'artifactory-ha')
+        if: "!contains(github.event.release.name, 'artifactory-ha')"
         run: echo "Not an artifactory release, exiting"; exit 1
 
       - name: Show ENV
