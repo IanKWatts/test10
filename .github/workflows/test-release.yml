@@ -28,7 +28,7 @@ jobs:
 
       - name: If it's an artifactory release
         if: |
-          (github.event_name == 'release' && contains(github.event.release_name, 'artifactory-ha')) ||
+          (github.event_name == 'release' && contains(github.event.name, 'artifactory-ha')) ||
           github.event_name != 'release'
         run: echo "It's an artifactory release"
 
