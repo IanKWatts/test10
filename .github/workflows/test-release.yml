@@ -24,7 +24,7 @@ jobs:
           printf "version: 1.0\n" >> tt
 
       - name: Generate master_key
-        run: echo MASTER_KEY=`openssl rand -hex 32` >> $GITHUB_ENV
+        run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
 
       - name: Test sed
         run: |
