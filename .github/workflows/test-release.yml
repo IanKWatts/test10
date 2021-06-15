@@ -26,8 +26,8 @@ jobs:
 
       - name: Create license file
         run: |
-          printf "${{ secrets.KLAB_ARTIFACTORY_LICENSE }}" > klab.lic
-          printf "${{ secrets.SILVER_ARTIFACTORY_LICENSE }}" > silver.lic
+          printf '%s\n' "${{ secrets.KLAB_ARTIFACTORY_LICENSE }}" > klab.lic
+          printf '%s\n' "${{ secrets.SILVER_ARTIFACTORY_LICENSE }}" > silver.lic
 
       - name: Generate master_key
         env:
