@@ -12,14 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Update tt
-        run: echo "master_key: asdf" >> tt
-
       - name: Create ENV var
         run: echo ARTIFACTORY_VERSION=\"`grep ^Fri tt | awk '{ print $2 }'`\" >> $GITHUB_ENV
 
       - name: Show ENV var
         run: echo "--> ${{ env.ARTIFACTORY_VERSION }}"
+
+      - name: Add to file
+        run: |
+          printf "master_key: qwerty\n" >> tt
 
       - name: Generate master_key
         run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
