@@ -4,14 +4,7 @@ env:
   GITHUB_CONTEXT: ${{ toJson(github) }}
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "web/**"
   workflow_dispatch:
-  release:
-    types: [published]
 
 jobs:
   artifactory-testing:
@@ -19,20 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      #- name: If artifactory release
-      #  if: "!contains(github.event.release.name, 'artifactory-ha')"
-      #  run: echo "Not an artifactory release, exiting"; exit 0
+      - name: Create ENV var
+        run: echo ARTIFACTORY_VERSION=\"`grep ^Fri tt | awk '{ print $2 }'`\" >> $GITHUB_ENV
 
-      - name: Show ENV
-        run: |
-          echo "${{ env.GITHUB_CONTEXT }}"
-          echo ""
-          echo "github.event_name: ${{ github.event_name }}"
-          echo "github.event.release.name: ${{ github.event.release.name }}"
-
-      - name: If it's an artifactory release
-        if: |
-          (github.event_name == 'release' && contains(github.event.release.name, 'artifactory-ha')) ||
-          github.event_name != 'release'
-        run: echo "It's an artifactory release"
-
+      - name: Show ENV var
+        run: echo "--> ${{ env.ARTIFACTORY_VERSION }}"
