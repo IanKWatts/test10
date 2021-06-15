@@ -25,7 +25,8 @@ jobs:
 
       - name: Create license file
         run: |
-          printf "${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\n" > artifactory.lic
+          printf "${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\n" > klab.lic
+          printf "${{ secrets.SILVER_ARTIFACTORY_LICENSE }}\n" > silver.lic
 
       - name: Generate master_key
         env:
@@ -41,6 +42,14 @@ jobs:
       - name: Show tt
         run: cat tt
 
-      - name: Show license file
+      - name: Make KLAB license file
+        if: ${{ env.ARTIFACTORY_VERSION == '7' }}
+        run: cp klab.lic artifactory.lic
+
+      - name: Make SILVER license file
+        if: ${{ env.ARTIFACTORY_VERSION == '8' }}
+        run: cp silver.lic artifactory.lic
+
+      - name: Show license
         run: cat artifactory.lic
 
