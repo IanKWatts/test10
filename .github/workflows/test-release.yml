@@ -21,6 +21,7 @@ jobs:
       - name: Add to file
         run: |
           printf "master_key: qwerty\n" >> tt
+          printf "version: 1.0\n" >> tt
 
       - name: Generate master_key
         run: echo MASTER_KEY=`openssl rand -hex 32` >> $GITHUB_ENV
@@ -28,6 +29,8 @@ jobs:
       - name: Test sed
         run: |
           sed -i "s/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/" tt
+          sed -i "s/^join_key:.*/join_key: ${{ env.MASTER_KEY }}/" tt
+          sed -i "s/^version:.*/version: ${{ env.ARTIFACTORY_VERSION }}/" tt
 
       - name: Show tt
         run: cat tt
