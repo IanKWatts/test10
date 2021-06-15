@@ -23,8 +23,8 @@ jobs:
           printf "master_key: qwerty\n" >> tt
 
       - name: Generate master_key
-        run: echo MASTER_KEY=\"`openssl rand -hex 32`\" >> $GITHUB_ENV
+        run: echo MASTER_KEY=`openssl rand -hex 32` >> $GITHUB_ENV
 
       - name: Test sed
-        run: sed -i 's/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/' tt
+        run: sed -i "s/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/" tt
 
