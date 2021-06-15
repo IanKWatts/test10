@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   artifactory-testing:
     runs-on: ubuntu-latest
     steps:
