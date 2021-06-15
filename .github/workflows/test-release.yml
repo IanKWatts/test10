@@ -29,3 +29,6 @@ jobs:
         run: |
           sed -i "s/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/" tt
 
+      - name: Show tt
+        run: cat tt
+
