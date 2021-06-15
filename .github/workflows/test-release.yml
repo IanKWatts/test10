@@ -31,6 +31,7 @@ jobs:
           sed -i 's/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/' tt
           sed -i 's/^join_key:.*/join_key: ${{ env.MASTER_KEY }}/' tt
           sed -i 's/^version:.*/version: ${{ env.ARTIFACTORY_VERSION }}/' tt
+          echo LICENSE=\"${{ secrets.KLAB_ARTIFACTORY_LICENSE }}\" >> $GITHUB_ENV
 
       - name: Show tt
         run: cat tt
