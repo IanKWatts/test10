@@ -28,9 +28,9 @@ jobs:
 
       - name: Test sed
         run: |
-          sed -i "s/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/" tt
-          sed -i "s/^join_key:.*/join_key: ${{ env.MASTER_KEY }}/" tt
-          sed -i "s/^version:.*/version: ${{ env.ARTIFACTORY_VERSION }}/" tt
+          sed -i 's/^master_key:.*/master_key: ${{ env.MASTER_KEY }}/' tt
+          sed -i 's/^join_key:.*/join_key: ${{ env.MASTER_KEY }}/' tt
+          sed -i 's/^version:.*/version: ${{ env.ARTIFACTORY_VERSION }}/' tt
 
       - name: Show tt
         run: cat tt
