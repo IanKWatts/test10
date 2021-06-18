@@ -22,3 +22,6 @@ jobs:
         sed -i "s|key: 'docker-remote'.*|key: 'docker-remote', username: '${{ env.DOCKER_REMOTE_ID }}', password: '${{ env.DOCKER_REMOTE_PASSWORD }}'|" vars.yml
         sed -i "s|key: 'redhat-docker-remote'.*|key: 'redhat-docker-remote', username: '${{ env.REDHAT_DOCKER_REMOTE_ID }}', password: '${{ env.REDHAT_DOCKER_REMOTE_PASSWORD }}'|" vars.yml
 
+    - name: cat file
+      run: cat vars.yml
+
