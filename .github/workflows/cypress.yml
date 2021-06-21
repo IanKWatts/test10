@@ -12,6 +12,7 @@ jobs:
       - name: Cypress testing
         uses: cypress-io/github-action@v2
         with:
+          build: npm i -D cypress
           headless: true
           working-directory: ./web
 
