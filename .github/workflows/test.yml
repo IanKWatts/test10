@@ -4,13 +4,13 @@ env:
   GITHUB_CONTEXT: ${{ toJson(github) }}
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "api/**"
-      - "db/**"
-      - "web/**"
+  #push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - "api/**"
+  #    - "db/**"
+  #    - "web/**"
   workflow_dispatch:
 
 jobs:
