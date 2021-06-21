@@ -13,4 +13,5 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           headless: true
+          working-directory: ./web
 
