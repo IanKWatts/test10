@@ -1,33 +1,52 @@
-name: Test project
+name: Create draft release
 
 on:
   workflow_dispatch:
+    inputs:
+      targetCluster:
+        description: "Install to which cluster? 'klab' or 'silver'"
+        required: true 
+        default: 'klab' 
 
 jobs:
   do_ocp:
     runs-on: ubuntu-latest
     env:
       OCP_PROJECT_NAME: iankwatts-tools
-      ARTIFACTORY_VERSION: 7.1.14
+      ARTIFACTORY_VERSION: 7.1.15
     steps:
-      #- name: OCP login
-      #  run: |
-      #    oc version
-      #    oc login --token=${{ secrets.OPENSHIFT_TOKEN }} --server=${{ secrets.OPENSHIFT_URL }}
-      #    oc project ${{ env.OCP_PROJECT_NAME }}
+      - name: Set target cluster
+        run: |
+          if [ "${{ github.event.inputs.target_cluster }}" == "klab" ]; then
+            echo TARGET_CLUSTER=klab >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.target_cluster }}" == "silver" ]; then
+            echo TARGET_CLUSTER=silver >> $GITHUB_ENV
+          else
+            echo "Enter a valid target cluster: klab or silver"
+            exit 1
+          fi
 
-      #- name: Debug
-      #  if: ${{ failure() }}
-      #  run: echo "Error - exiting" && exit 1
+      - name: KLAB selected
+        if: ${{ env.TARGET_CLUSTER == 'klab' }}
+        debug:
+          msg: "Deploying to KLAB"
 
-      - name: Create release draft
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.PAT }}
-          draft: true
-          name: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
-          allowUpdates: true
-          omitBody: true
-          tag: "artifactory-${{ env.ARTIFACTORY_VERSION }}"
-          commit: main
+      - name: SILVER selected
+        if: ${{ env.TARGET_CLUSTER == 'silver' }}
+        debug:
+          msg: "Deploying to SILVER"
 
+      #- name: Create release draft
+      #  uses: ncipollo/release-action@v1
+      #  with:
+      #    token: ${{ secrets.PAT }}
+      #    draft: true
+      #    name: "artifactory-ha-${{ env.ARTIFACTORY_VERSION }}"
+      #    allowUpdates: true
+      #    omitBody: true
+      #    tag: "artifactory-ha-${{ env.ARTIFACTORY_VERSION }}"
+      #    commit: main
+
+      #- name: Get release URL
+      #  run: curl -H 'Authorization: token $GH_TOKEN' "https://api.github.com/repos/IanKWatts/test10/releases" | jq ".[0].html_url" | sed 's/releases\/tag/releases\/edit/' | sed 's/"//g'
+      #  register: draft-release-url
