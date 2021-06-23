@@ -1,4 +1,4 @@
-name: Create draft release
+name: Test inputs
 
 on:
   workflow_dispatch:
@@ -28,13 +28,11 @@ jobs:
 
       - name: KLAB selected
         if: ${{ env.TARGET_CLUSTER == 'klab' }}
-        debug:
-          msg: "Deploying to KLAB"
+        run: echo "Deploying to KLAB"
 
       - name: SILVER selected
         if: ${{ env.TARGET_CLUSTER == 'silver' }}
-        debug:
-          msg: "Deploying to SILVER"
+        run: echo "Deploying to SILVER"
 
       #- name: Create release draft
       #  uses: ncipollo/release-action@v1
