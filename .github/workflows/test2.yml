@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       target_cluster:
-        description: "Install to which cluster?<br/>klab<br/>silver"
+        description: "Install to which cluster? klab, silver"
         required: true 
         default: 'klab' 
 
