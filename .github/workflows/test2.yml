@@ -3,7 +3,7 @@ name: Test inputs
 on:
   workflow_dispatch:
     inputs:
-      targetCluster:
+      target_cluster:
         description: "Install to which cluster? 'klab' or 'silver'"
         required: true 
         default: 'klab' 
