@@ -1,5 +1,8 @@
 name: Cypress Testing
 
+env:
+  GITHUB_CONTEXT: ${{ toJson(github) }}
+
 on:
   workflow_dispatch:
 
@@ -8,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Show ENV
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Cypress testing
         uses: cypress-io/github-action@v2
@@ -21,4 +27,7 @@ jobs:
         with:
           name: cypress video
           path: web/cypress/videos/
+
+      #- name: RocketChat notification
+      #  run: curl -X POST -H 'Content-Type: application/json' --data '{"text":"There was an error in the Cypress test(s) for the registry app during the..."}' "${{ secrets.ROCKET_CHAT_HOOK_URL }}"
 
