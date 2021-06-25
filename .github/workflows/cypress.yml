@@ -29,7 +29,7 @@ jobs:
       #    path: web/cypress/videos/
 
       - name: Link to workflow
-        run: echo "There was an error in the Cypress test(s) for the registry app during the ${{ github.workflow }} workflow.  View the output and download test output files here: https://github.com/IanKWatts/test10/actions/runs/${{ github.run_id }}"
+        run: echo There was an error in the Cypress test(s) for the registry app during the ${{ github.workflow }} workflow.  View the output and download test output files here: https://github.com/IanKWatts/test10/actions/runs/${{ github.run_id }}
 
       #- name: RocketChat notification
       #  run: curl -X POST -H 'Content-Type: application/json' --data '{"text":"There was an error in the Cypress test(s) for the registry app during the..."}' "${{ secrets.ROCKET_CHAT_HOOK_URL }}"
