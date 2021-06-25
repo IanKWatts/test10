@@ -33,5 +33,5 @@ jobs:
         env:
           ROCKETCHAT_MESSAGE: "This is a test."
         run: |
-          curl -X POST -H 'Content-Type: application/json' --data '{"text":""}' "http://example.com/"
+          curl -X POST -H 'Content-Type: application/json' --data '{"text":"${{ env.ROCKETCHAT_MESSAGE }}"}' "http://example.com/"
 
