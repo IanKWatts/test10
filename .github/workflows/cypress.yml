@@ -31,7 +31,7 @@ jobs:
       - name: RocketChat notification
         #if: ${{ failure() }}
         env:
-          ROCKETCHAT_MESSAGE: "There was an error in the Cypress test(s) for the registry app during the ${{ github.workflow }} workflow.  View the output and download test output files at https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          ROCKETCHAT_MESSAGE: "This is a test."
         run: |
           curl -X POST -H 'Content-Type: application/json' --data '{"text":"${{ env.ROCKETCHAT_MESSAGE }}"}' "${{ secrets.ROCKET_CHAT_HOOK_URL }}"
 
