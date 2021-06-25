@@ -19,3 +19,9 @@ jobs:
       - name: Show cypress files
         run: ls -lR .
 
+      - name: Archive files
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress video
+          path: web/cypress/videos/test1.js.mp4
+
