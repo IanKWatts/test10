@@ -34,4 +34,5 @@ jobs:
           ROCKETCHAT_MESSAGE: "This is a test."
         run: |
           curl -X POST -H 'Content-Type: application/json' --data '{"text":"${{ env.ROCKETCHAT_MESSAGE }}"}' "${{ secrets.ROCKET_CHAT_HOOK_URL }}"
+          exit 1
 
