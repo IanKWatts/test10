@@ -16,3 +16,6 @@ jobs:
           headless: true
           working-directory: ./web
 
+      - name: Show cypress files
+        run: ls -lR cypress
+
