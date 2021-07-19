@@ -11,6 +11,9 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
-      - name: debug
+      - name: debug1
         run: echo $GITHUB_CONTEXT
+
+      - name: debug2
+        run: echo ${{ env.github }}
 
