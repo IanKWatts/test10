@@ -4,9 +4,9 @@ kind: NetworkPolicy
 metadata:
   name: app1-network-policy
 spec:
-  podSelector:
-    matchLabels:
-      name: app1
+  podSelector: {}
+  policyTypes:
+  - Ingress
   ingress:
   - ports:
     - protocol: TCP
