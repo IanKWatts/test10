@@ -4,9 +4,13 @@ metadata:
   name: app1
 spec:
   ports:
-  - port: 80
-    targetPort: 9999
-  - port: 443
-    targetPort: 9999
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 9999
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 9999
   selector:
     app: app1
