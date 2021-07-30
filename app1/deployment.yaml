@@ -17,4 +17,4 @@ spec:
       - image: image-registry.openshift-image-registry.svc:5000/iankwatts-tools/test10:latest
         name: app1
         ports:
-        - containerPort: 80
+        - containerPort: 9999

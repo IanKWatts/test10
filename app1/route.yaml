@@ -8,7 +8,7 @@ spec:
     kind: Service
     name: app1
   port:
-    targetPort: 80-tcp
+    targetPort: 9999-tcp
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
