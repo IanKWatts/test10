@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/iankwatts-tools/test10@sha256:14b252609897f8eb67db74227af3792f653635fab9fccf730bd7fbeb7240ed94
+        name: app1
+        ports:
+        - containerPort: 9999

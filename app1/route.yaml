@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app1
+  namespace: iankwatts-dev
+spec:
+  to:
+    kind: Service
+    name: app1
+  port:
+    targetPort: 9999-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
