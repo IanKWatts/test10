@@ -2,7 +2,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: app2
-  namespace: iankwatts-dev
+  namespace: iankwatts-test
 spec:
   to:
     kind: Service
