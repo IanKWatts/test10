@@ -8,9 +8,5 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 9999
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 9999
   selector:
     app: app1
