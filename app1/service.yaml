@@ -10,3 +10,4 @@ spec:
       targetPort: 9999
   selector:
     app: app1
+  clusterIP: 10.98.240.27
