@@ -10,3 +10,4 @@ spec:
       targetPort: 9999
   selector:
     app: app1
+  type: ClusterIP
